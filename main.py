@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
 
 class Reference(BaseModel):
@@ -39,3 +39,8 @@ def read_prompt(prompt: str) -> Response:
           time="27 seconds",
           references=references,
   )
+
+@app.post("/upload")
+async def upload_file(file: UploadFile):
+  return {"filename": file.filename}
+
